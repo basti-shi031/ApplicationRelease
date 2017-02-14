@@ -51,7 +51,7 @@ def main():
     # 读取配置
     config = readConfig()
     # 找到所有满足条件的文件
-    files = findFileList(config.get("fileDir"), config.get("acceptFile"))
+    files = findFileList(config.get("fileDir"), config.get("fileType"))
     # 查找文件信息
     fileInfo = findFileTime(files)
     # 最新文件index
