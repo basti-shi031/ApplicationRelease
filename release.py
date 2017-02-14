@@ -22,7 +22,7 @@ def findFileList(dp, suffix):
 def findFileTime(apks):
     fileInfo = []
     for apk in apks:
-        fileInfo.append((os.path.getsize(apk), os.path.getmtime(apk)))
+        fileInfo.append((os.path.getsize(apk), os.path.getmtime(apk),apk))
     return fileInfo
 
 
@@ -35,7 +35,7 @@ def findLatestFileIndex(fileInfo):
             maxIndex = index
             latestTime = fileInfo[index][1]
 
-    print("当前最新文件", fileInfo[maxIndex])
+    print("当前最新文件", fileInfo[maxIndex][2])
     return maxIndex
 
 
