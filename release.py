@@ -1,6 +1,7 @@
 import os
 import upload
 import teambition
+import json
 
 
 # 查文件列表
@@ -37,7 +38,16 @@ def findLatestFileIndex(fileInfo):
     return maxIndex
 
 
+# 读取配置
+def readConfig():
+    f = open("config.json", encoding='utf-8')
+    config = json.load(f)
+    return config
+
+
 def main():
+    # 读取配置
+    config = readConfig()
     # 找到所有满足条件的文件
     apks = findFileList('C:\\Users\\Boateng17\\PycharmProjects\\ApplicationRelease', '.py')
     # 查找文件信息
@@ -56,7 +66,6 @@ def main():
     firstHalfTable = content.split('</tbody>', 1)[0]
     secondHalfTable = content.split('</tbody>', 1)[1]
     module = '<tr><td>%s</td><td>%s</td></tr></tbody>'
-
     firstHalfTable = firstHalfTable + module % ('new', link)
     data = firstHalfTable + secondHalfTable
     print(data)
@@ -65,4 +74,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    config = readConfig()
+    print(config)
