@@ -14,7 +14,6 @@ def findFileList(dp, suffix):
         for ll in l[2]:
             if (ll.endswith(suffix)):
                 apks.append(l[0] + "\\" + ll)
-                print("文件的路径是：", l[0] + "\\" + ll)
         break
     return apks
 
@@ -35,6 +34,8 @@ def findLatestFileIndex(fileInfo):
         if (latestTime <= fileInfo[index][1]):
             maxIndex = index
             latestTime = fileInfo[index][1]
+
+    print("当前最新文件", fileInfo[maxIndex])
     return maxIndex
 
 
@@ -59,23 +60,17 @@ def main():
     qiniu = Qiniu(config.get("access_key"), config.get("secret_key"), config.get("bucket_name"))
     key = upload.upload(files[index], qiniu)
     link = config.get("qiniuBaseUrl") + key
-    print(link)
-    data = ''
     # 获取表格
     teambition = Teambition(config.get("cookies"), config.get("getUrl"), config.get("postId"))
     content = teambition.get()
     # 在表格最后一行加入一行数据
-    print(content)
     firstHalfTable = content.split('</tbody>', 1)[0]
     secondHalfTable = content.split('</tbody>', 1)[1]
     type = sys.argv[1]
-    print(type)
     testModule = ' <tr><td><a href="%s" target="_blank">%s</a></td><td><br/></td></tr></tbody>'
     releaseModule = ' <tr><td><br/></td><td><a href="%s" target="_blank">%s</a></td></tr></tbody>'
-    print(sys.argv[2])
     firstHalfTable = firstHalfTable + (releaseModule if type == "release" else testModule) % (link, sys.argv[2])
     data = firstHalfTable + secondHalfTable
-    print(data)
     # 更新teambition
     teambition.update(data)
 

@@ -11,14 +11,10 @@ def upload(file, qiniu):
     bucket_name = qiniu.bucket_name
 
     key = file.split('\\')[-1];
-    print(key)
-
     # 生成token
     token = q.upload_token(bucket_name, key, 3600)
-    print(token)
-
     ret, info = put_file(token, key, file)
-    print(info)
+    print("文件上传成功")
     return key
     # assert ret['key'] == key
     # assert ret['hash'] == etag(localfile)

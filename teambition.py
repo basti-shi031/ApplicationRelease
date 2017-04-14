@@ -23,7 +23,7 @@ class Teambition(object):
         payload = {'content': data}
         response = requests.put(url='https://www.teambition.com/api/posts/' + self.postId,
                                 data=json.dumps(payload), headers=headers, cookies=self.cookies)
-        print(response.text)
+        print("teambition更新成功")
 
     def get(self):
         updateUrl = 'https://www.teambition.com/api/posts/%s/activities?_postId=%s&_=1486136195044'
