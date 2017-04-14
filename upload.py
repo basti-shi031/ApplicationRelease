@@ -1,14 +1,14 @@
 from qiniu import Auth, put_file, etag
-import qiniu.config
 
 
-def upload(file):
-    access_key = 'pNwdZ3bvSi5QuStSOcx0vnrEBzxgChzp6ARajJlq'
-    secret_key = 'nz__MH4jk0B0ZcQSCunbrdj5omJFoRs7ca00GaAz'
+def upload(file, qiniu):
+    access_key = qiniu.access_key
+    secret_key = qiniu.secret_key
 
     q = Auth(access_key, secret_key)
 
-    bucket_name = 'testbast'
+    # bucket_name = 'testbast'
+    bucket_name = qiniu.bucket_name
 
     key = file.split('\\')[-1];
     print(key)
